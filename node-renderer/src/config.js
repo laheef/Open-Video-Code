@@ -4,6 +4,14 @@ const fs = require('fs');
 
 const ROOT = path.resolve(__dirname, '..');
 
+// Auto-load .env (Node 18.20+/20.6+/22 built-in — no dotenv dependency needed).
+try {
+  const envPath = path.join(ROOT, '.env');
+  if (typeof process.loadEnvFile === 'function' && fs.existsSync(envPath)) {
+    process.loadEnvFile(envPath);
+  }
+} catch { /* ignore malformed .env */ }
+
 function bool(v, def = false) {
   if (v === undefined || v === null || v === '') return def;
   return ['1', 'true', 'yes', 'on'].includes(String(v).toLowerCase());
