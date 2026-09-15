@@ -1,0 +1,22 @@
+{
+  "name": "script-to-video-renderer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "preview": "npx remotion studio remotion/index.js",
+    "test": "node test/schema.test.js"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.525",
+    "@remotion/renderer": "^4.0.525",
+    "@sparticuz/chromium": "^123.0.1",
+    "express": "^4.22.3",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "^4.0.525"
+  },
+  "description": "Standalone Node.js AI script-to-video renderer (Remotion)"
+}

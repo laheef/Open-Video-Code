@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Script → Video</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">▶</span>
+      <div>
+        <h1>AI Script → Video</h1>
+        <p class="tagline">Code-based short-form video, generated from a prompt · Remotion</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge" id="badge-llm">LLM: …</span>
+      <span class="badge" id="badge-render">render: …</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel form-panel">
+      <h2>1 · Describe your video</h2>
+      <label class="field">
+        <span>Script / idea</span>
+        <textarea id="script" rows="7" placeholder="e.g. 3 reasons cold showers boost your focus. Studies show a 250% dopamine spike. Try it for 30 days.">3 reasons to start journaling today. It cuts stress by 30%. It sharpens your memory. And it helps you actually finish what you start. Grab a notebook and begin tonight.</textarea>
+      </label>
+
+      <div class="grid">
+        <label class="field">
+          <span>Aspect ratio</span>
+          <select id="aspectRatio"></select>
+        </label>
+        <label class="field">
+          <span>Target duration</span>
+          <select id="durationSec">
+            <option value="">Auto</option>
+            <option value="10">10s</option>
+            <option value="15" selected>15s</option>
+            <option value="20">20s</option>
+            <option value="30">30s</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Palette</span>
+          <select id="palette"><option value="">Auto</option></select>
+        </label>
+        <label class="field">
+          <span>Font</span>
+          <select id="font"><option value="">Auto</option></select>
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Style / tone (optional)</span>
+        <input id="style" type="text" placeholder="e.g. energetic, minimal, motivational" />
+      </label>
+
+      <button id="generate" class="btn-primary">Generate video</button>
+      <p class="hint">Rendering runs as a background job — this can take from a few seconds to a couple of minutes.</p>
+    </section>
+
+    <section class="panel result-panel">
+      <h2>2 · Result</h2>
+      <div id="status-area" class="status-area empty">
+        <p>Submit a script to start a render job.</p>
+      </div>
+
+      <div id="video-area" class="video-area hidden">
+        <video id="player" controls playsinline></video>
+        <div class="video-actions">
+          <a id="download" class="btn-secondary" href="#" download>⬇ Download MP4</a>
+          <button id="attach" class="btn-secondary">📎 Attach to a Post</button>
+        </div>
+      </div>
+
+      <details id="scene-details" class="scene-details hidden">
+        <summary>Generated scene JSON</summary>
+        <pre id="scene-json"></pre>
+      </details>
+    </section>
+  </main>
+
+  <section class="panel jobs-panel">
+    <h2>Recent jobs</h2>
+    <div id="jobs-list" class="jobs-list"></div>
+  </section>
+
+  <!-- Mock "Create a Post" modal to show the media-upload integration point -->
+  <div id="post-modal" class="modal hidden">
+    <div class="modal-box">
+      <h3>Create a Post</h3>
+      <p class="hint">This mirrors your existing media upload flow — the rendered MP4 is attached exactly like any uploaded video.</p>
+      <div class="post-media" id="post-media"></div>
+      <textarea id="post-caption" rows="3" placeholder="Write a caption…"></textarea>
+      <div class="modal-actions">
+        <button id="post-cancel" class="btn-secondary">Cancel</button>
+        <button id="post-publish" class="btn-primary">Publish</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
